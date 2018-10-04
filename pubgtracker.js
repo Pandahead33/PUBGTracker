@@ -89,7 +89,7 @@ fetch(url + document.getElementById('PUBGuser').value, {
 						assistCell.innerHTML = res.included[i].attributes.stats.assists;
 					}
 			}
-			document.getElementById("playerCount").innerHTML = "Match players: " + table.rows.length;
+			document.getElementById("playerCount").innerHTML = "Match players: " + table.rows.length-1;
 			}
 		})
 		.catch(function(error) {
