@@ -27,7 +27,6 @@ var matchurl = 'https://api.pubg.com/shards/steam/matches/'
 var players = document.getElementById("playerinput").value.split('\n');//['Zach329', 'dperez3139', 'Wizingwizard', 'AskForChaos']
 
 var matchId = 0; 
-var playerCount = 0;
 var table = document.getElementById('stats');
 	
 fetch(url + document.getElementById('PUBGuser').value, {
@@ -69,9 +68,7 @@ fetch(url + document.getElementById('PUBGuser').value, {
 				{					
 					
 					if(document.getElementById("displayAll").checked || players.includes(res.included[i].attributes.stats.name)) {
-					
-						playerCount++; 
-						
+											
 						
 						
 						var row = table.insertRow(table.rows.length);
@@ -92,8 +89,7 @@ fetch(url + document.getElementById('PUBGuser').value, {
 						assistCell.innerHTML = res.included[i].attributes.stats.assists;
 					}
 			}
-			console.log(playerCount); 
-			document.getElementById("playerCount").innerHTML = "Match players: " + playerCount;
+			document.getElementById("playerCount").innerHTML = "Match players: " + table.rows.length;
 			}
 		})
 		.catch(function(error) {
