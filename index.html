@@ -4,6 +4,8 @@
 <head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
 <title>PUBG Last Match Player Stats</title>
 <style>
 	@import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500';
@@ -298,6 +300,8 @@
 	
 	<input type="text" id="myInput" onkeyup="search()" placeholder="Search for names..">
 
+	<p id="playerCount"></p>
+	
 	<table id="stats">
 	<tr>
 		<th onclick="sortTable(0)"> Name </th>
@@ -386,7 +390,7 @@ fetch(url + document.getElementById('PUBGuser').value, {
 					
 					if(document.getElementById("displayAll").checked || players.includes(res.included[i].attributes.stats.name)) {
 					
-						
+						playerCount++; 
 						
 						
 						
@@ -413,6 +417,7 @@ fetch(url + document.getElementById('PUBGuser').value, {
 						assistCell.innerHTML = res.included[i].attributes.stats.assists;
 					}
 			}
+			document.getElementById("playerCount").innerHTML = "Match players: " + playerCount;
 			}
 		})
 		.catch(function(error) {
