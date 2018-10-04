@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+	@import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500';
+
+	* {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+        vertical-align: baseline;
+        background: transparent;
+    }
+	
+	body {
+		font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+		color: #555;
+	}
+
+	
+	header {
+		background-color: orange;
+		background-image:url("header.jpg");
+		background-position: center top;
+		background-repeat: no-repeat;
+		background-size:cover;
+		line-height: 5em;
+		padding: 10vm 2em;
+		text-align: center;
+		height: 35%;
+		top: 0;
+		
+	}
+	
+	header img {
+		display: inline-block;
+		height: 65px;
+		vertical-align: middle;
+		width: 65px;
+		border-radius: 60px;
+		border: 5px solid white;
+	}
+
+	
+	header h1 {
+	  color: white;
+	  font-size: 2.5em;
+	  font-weight: 300;
+	  text-shadow: 2px 2px 8px #000;
+	}
+
+	header a {
+	  border: 5px solid white;
+	  background: rgba(193, 66, 66, 0.8);
+	  border-radius: 13371337px;
+	  color: white;
+	  font-size: 0.6em;
+	  letter-spacing: 0.2em;
+	  padding: 1em 2em;
+	  text-transform: uppercase;
+	  text-decoration: none;
+	  transition: none 200ms ease-out;
+	  transition-property: color, background;
+	}
+
+	button {
+		display: inline-block;
+		background-color: #FDBD2F; 
+		text-align: center;
+		vertical-align: middle;
+		margin: 0px auto;
+		padding: 10px;
+		border-radius: 5px;
+		border: 2px solid transparent;
+		
+	}
+	
+	button:hover {
+		cursor: pointer;
+		background: red;
+		color: white;
+	}
+	
+	header a:hover {
+	  background:  black;
+	  color: white;
+	}
+	
+	main {
+		margin: 0 auto;
+		max-width: 50em;
+		line-height: 1.5em;
+		padding: 2em 1em;
+	}
+	
+	h2 {
+		margin-top: 1em;
+		padding-top: 1em;
+	}
+	
+	h1, h2, h3, strong {
+		color: #333;
+	}
+	
+	ul {
+		padding-left: 2em;
+		margin-bottom: 2em; 
+	}
+	
+	a {
+		color: #e81c4f;
+	}
+	
+	table, td, th {
+		border: 1px solid black;
+		border-collapse: collapse;
+	}
+	
+	textarea {
+		border: 1px solid black;
+	}
+	
+	.switch {
+	  position: relative;
+	  display: inline-block;
+	  width: 60px;
+	  height: 34px;
+	}
+
+	.switch input {display:none;}
+
+	.slider {
+	  position: absolute;
+	  cursor: pointer;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+	  background-color: #ccc;
+	  -webkit-transition: .4s;
+	  transition: .4s;
+	}
+
+	.slider:before {
+	  position: absolute;
+	  content: "";
+	  height: 26px;
+	  width: 26px;
+	  left: 4px;
+	  bottom: 4px;
+	  background-color: white;
+	  -webkit-transition: .4s;
+	  transition: .4s;
+	}
+
+	input:checked + .slider {
+	  background-color: #2196F3;
+	}
+
+	input:focus + .slider {
+	  box-shadow: 0 0 1px #2196F3;
+	}
+
+	input:checked + .slider:before {
+	  -webkit-transform: translateX(26px);
+	  -ms-transform: translateX(26px);
+	  transform: translateX(26px);
+	}
+
+	/* Rounded sliders */
+	.slider.round {
+	  border-radius: 34px;
+	}
+
+	.slider.round:before {
+	  border-radius: 50%;
+	}
+	#myInput {
+		background-image: url('https://www.w3schools.com/css/searchicon.png'); /* Add a search icon to input */
+		background-position: 10px 12px; /* Position the search icon */
+		background-repeat: no-repeat; /* Do not repeat the icon image */
+
+		font-size: 16px; /* Increase font-size */
+		padding: 12px 0px 12px 0px; /* Add some padding */
+		padding-left: 40px;
+		border: 1px solid #ddd; /* Add a grey border */
+		margin-bottom: 12px; /* Add some space below the input */
+	}
+
+	#stats {
+		border-collapse: collapse; /* Collapse borders */
+		width: 100%; /* Full-width */
+		border: 1px solid #ddd; /* Add a grey border */
+		font-size: 18px; /* Increase font-size */
+	}
+
+	#stats th, #stats td {
+		text-align: left; /* Left-align text */
+		padding: 12px; /* Add padding */
+	}
+
+	#stats tr {
+		/* Add a bottom border to all table rows */
+		border-bottom: 1px solid #ddd; 
+	}
+
+	#stats tr.header, #stats tr:hover {
+		/* Add a grey background color to the table header and on hover */
+		background-color: #f1f1f1;
+	}
+	#hide {
+		display: none;
+	}
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+<header>
+	<h1>PUBG Last Match Player Stats</h1>
+	
+	<div style="display:table; text-align:center; margin: 0px auto;">
+		<div style="display:table-cell; padding: 20px;">
+			<img id="logo" src="logo.jpg" alt="Lucas Puskaric Logo">
+		</div>
+		<div style="display:table-cell;">
+			<p><a href="http://lucaspuskaric.com" target="_black">by Lucas Puskaric</a></p>
+		</div>
+	</div>
+</header>
+
+<main>
+
+	<h2>A utility to extract all players stats from the last match you played.</h2>
+	<br />
+	
+	<div style="margin-bottom: 1em; text-align: right;">
+		<button onclick="toggleDiv()" style="margin-right: 20px;"> Need help? </button>
+	</div>
+	
+	<div id="hide">
+		<ul style="background: #EAEAEA; border-radius: 25px; padding: 10px 10px 10px 50px;">
+				<li>Type in a username.</li>
+				<li>Toggle the "Show all players" button to see everyone's stats.<br><small>Alternatively, you can type in individual names if you just want to see your squad or friends</small> </li>
+				<li>Click "Extract Match Details"</li>
+				<li>Players will appear in the table. You can search by using the search bar.</li>
+				<li>You can click the column headers to order by ascending or descending.<br><small>For instance, if you want to see who got the most kills, click on the "Kills" column.</small></li>
+		</ul>
+	</div>
+
+
+
+	<div style="text-align: center">
+		<input type="text" id="PUBGuser" placeholder="Enter PUBG username" style="color: transparent; text-shadow: 0 0 0 black; font-size: 20px; padding: 20px; border: 5px solid #FDBD2F; margin: 0px auto; text-align:center;" id="initialname"></input>
+	</div>
+	
+	<p id="test" style="text-align:center;"></p>
+	
+	<div style="text-align: center">
+	<h2>Select one</h2>
+	</div>
+	
+	<div style="postition: absolute; left: 0; margin: 0px auto; display:table; width:100%; text-align: center;">
+		<div style="display:table-cell; width: 33%; padding: 16px;">
+			<p>Show all players</p> 
+			<label class="switch">
+			  <input type="checkbox" id="displayAll" checked>
+			  <span class="slider round"></span>
+			</label>
+		</div>	
+
+		<div style="display: table-cell; width: 33%; vertical-align: middle; padding: 16px;">
+			<div>
+				<h2 style="padding: 0px; margin: 0px;">OR</h2>
+			</div>
+		</div>
+
+
+		<div style="display:table-cell; padding: 16px;">
+			<p>Show select players (one player per line)</p>
+			<textarea id="playerinput" rows="4" cols="20">Zach329</textarea>
+		</div>
+	</div>
+
+	<div style="margin: 0px auto; margin-top: 1.5em; margin-bottom: 1.5em; text-align:center;">
+	<button onclick="fetcher()">Extract Match Details</button>
+	</div>
+	
+	<input type="text" id="myInput" onkeyup="search()" placeholder="Search for names..">
+
+	<table id="stats">
+	<tr>
+		<th onclick="sortTable(0)"> Name </th>
+		<th onclick="sortTable(1)"> Kills </th>
+		<th onclick="sortTable(2)"> Damage Dealt</th>
+		<th onclick="sortTable(3)"> Finishing Position </th>
+		<th onclick="sortTable(4)"> Survival Time </th> 
+		<th onclick="sortTable(5)"> DBNOs </th>
+		<th onclick="sortTable(6)"> Assists </th>
+	</tr>
+	</table>
+</main>
+</body>
+
+<script>
+
+function toggleDiv() {
+	
+	var x = document.getElementById("hide");
+	
+	if(x.style.display === "block") {
+		x.style.display = "none"; 
+	} else {
+		x.style.display = "block";
+	}
+	
+}
+
+function createNode(element) {
+	return document.createElement(element);
+}
+
+function append(parent, el) {
+	return parent.appendChild(el);
+}
+
+function fetcher() {
+	
+const ul = document.getElementById('authors');
+//const url = 'https://randomuser.me/api/?results=10';
+const url = 'https://api.pubg.com/shards/pc-na/players?filter[playerNames]='
+var matchurl = 'https://api.pubg.com/shards/steam/matches/'
+
+var players = document.getElementById("playerinput").value.split('\n');//['Zach329', 'dperez3139', 'Wizingwizard', 'AskForChaos']
+
+var matchId = 0; 
+var table = document.getElementById('stats');
+	
+fetch(url + document.getElementById('PUBGuser').value, {
+	method: 'get',
+	headers: new Headers({
+		'Authorization' : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI0OTI0ODM4MC05ZmZmLTAxMzYtY2EzOC0wN2NiYmEyMzM3ZDEiLCJpc3MiOiJnYW1lbG9ja2VyIiwiaWF0IjoxNTM3NTU2NzUzLCJwdWIiOiJibHVlaG9sZSIsInRpdGxlIjoicHViZyIsImFwcCI6ImRlbmJpcmQifQ.oTEqkj4E1f_dPAhbEuUygIhwx7Pas2QaxhvmgW0Fqzg',
+		'Accept' : 'application/vnd.api+json'
+	})
+	})
+	.then((resp) => resp.json())
+	.then(function(res) {
+		console.log(res.data[0]); 
+		document.getElementById('test').innerHTML = res.data[0].relationships.matches.data[0].id; 
+		
+		console.log(document.getElementById('test').innerHTML);
+		matchId = res.data[0].relationships.matches.data[0].id; 
+		
+		console.log(matchurl + matchId); 
+		
+		var full = matchurl + matchId;
+		console.log(full); 	
+		
+		//
+		fetch('https://api.pubg.com/shards/steam/matches/' + document.getElementById('test').innerHTML, {
+		method: 'get',
+		headers: new Headers({
+			'Authorization' : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI0OTI0ODM4MC05ZmZmLTAxMzYtY2EzOC0wN2NiYmEyMzM3ZDEiLCJpc3MiOiJnYW1lbG9ja2VyIiwiaWF0IjoxNTM3NTU2NzUzLCJwdWIiOiJibHVlaG9sZSIsInRpdGxlIjoicHViZyIsImFwcCI6ImRlbmJpcmQifQ.oTEqkj4E1f_dPAhbEuUygIhwx7Pas2QaxhvmgW0Fqzg',
+			'Accept' : 'application/vnd.api+json'
+		})
+		})
+		.then((resp) => resp.json())
+		.then(function(res) {
+			console.log(res);
+			var i; 
+			table.innerHTML = table.rows[0].innerHTML;
+			for(i = 0; i < res.included.length; i++) 
+			{
+				if(res.included[i].type === "participant")
+				{					
+					
+					if(document.getElementById("displayAll").checked || players.includes(res.included[i].attributes.stats.name)) {
+					
+						
+						
+						
+						
+						var row = table.insertRow(table.rows.length);
+						var nameCell = row.insertCell(0);
+						var killCell = row.insertCell(1);
+						var damageCell = row.insertCell(2);
+						var winPlaceCell = row.insertCell(3);
+						var timeSurvivedCell = row.insertCell(4);
+						var DBNOCell = row.insertCell(5);
+						var assistCell = row.insertCell(6);
+
+						console.log(res.included[i].attributes.stats.kills); 
+						console.log(res.included[i].attributes.stats.damageDealt);
+						console.log(res.included[i].attributes.stats.winPlace);
+						console.log(res.included[i].attributes.stats.timeSurvived);
+						
+						nameCell.innerHTML = res.included[i].attributes.stats.name;
+						killCell.innerHTML = res.included[i].attributes.stats.kills; 
+						damageCell.innerHTML = res.included[i].attributes.stats.damageDealt;
+						winPlaceCell.innerHTML = res.included[i].attributes.stats.winPlace;
+						timeSurvivedCell.innerHTML = (res.included[i].attributes.stats.timeSurvived / 60).toFixed(2) + ' minutes';
+						DBNOCell.innerHTML = res.included[i].attributes.stats.DBNOs;
+						assistCell.innerHTML = res.included[i].attributes.stats.assists;
+					}
+			}
+			}
+		})
+		.catch(function(error) {
+			console.log(error);
+		});
+		
+		//
+		
+	})
+	.catch(function(error) {
+		console.log(error);
+	});
+	
+	
+
+}
+
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("stats");
+  switching = true;
+  // Set the sorting direction to ascending:
+  dir = "asc"; 
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (i = 1; i < (rows.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /* Check if the two rows should switch place,
+      based on the direction, asc or desc: */
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      // Each time a switch is done, increase this count by 1:
+      switchcount ++; 
+    } else {
+      /* If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again. */
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+function search() {
+  // Declare variables 
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("stats");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+}
+
+</script>
+</html>
