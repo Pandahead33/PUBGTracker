@@ -21,13 +21,13 @@ function append(parent, el) {
 function fetcher() {
 	
 const ul = document.getElementById('authors');
-//const url = 'https://randomuser.me/api/?results=10';
 const url = 'https://api.pubg.com/shards/pc-na/players?filter[playerNames]='
 var matchurl = 'https://api.pubg.com/shards/steam/matches/'
 
 var players = document.getElementById("playerinput").value.split('\n');//['Zach329', 'dperez3139', 'Wizingwizard', 'AskForChaos']
 
 var matchId = 0; 
+var playerCount = 0;
 var table = document.getElementById('stats');
 	
 fetch(url + document.getElementById('PUBGuser').value, {
@@ -83,11 +83,6 @@ fetch(url + document.getElementById('PUBGuser').value, {
 						var DBNOCell = row.insertCell(5);
 						var assistCell = row.insertCell(6);
 
-						console.log(res.included[i].attributes.stats.kills); 
-						console.log(res.included[i].attributes.stats.damageDealt);
-						console.log(res.included[i].attributes.stats.winPlace);
-						console.log(res.included[i].attributes.stats.timeSurvived);
-						
 						nameCell.innerHTML = res.included[i].attributes.stats.name;
 						killCell.innerHTML = res.included[i].attributes.stats.kills; 
 						damageCell.innerHTML = res.included[i].attributes.stats.damageDealt;
@@ -97,6 +92,7 @@ fetch(url + document.getElementById('PUBGuser').value, {
 						assistCell.innerHTML = res.included[i].attributes.stats.assists;
 					}
 			}
+			console.log(playerCount); 
 			document.getElementById("playerCount").innerHTML = "Match players: " + playerCount;
 			}
 		})
