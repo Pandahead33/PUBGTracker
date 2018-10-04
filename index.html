@@ -300,12 +300,12 @@
 	<table id="stats">
 	<tr>
 		<th onclick="sortTable(0)"> Name </th>
-		<th onclick="sortTable(1)"> Kills </th>
-		<th onclick="sortTable(2)"> Damage Dealt</th>
-		<th onclick="sortTable(3)"> Finishing Position </th>
-		<th onclick="sortTable(4)"> Survival Time </th> 
-		<th onclick="sortTable(5)"> DBNOs </th>
-		<th onclick="sortTable(6)"> Assists </th>
+		<th onclick="sortTableNumber(1)"> Kills </th>
+		<th onclick="sortTableNumber(2)"> Damage Dealt</th>
+		<th onclick="sortTableNumber(3)"> Finishing Position </th>
+		<th onclick="sortTableNumber(4)"> Survival Time (minutes) </th> 
+		<th onclick="sortTableNumber(5)"> DBNOs </th>
+		<th onclick="sortTableNumber(6)"> Assists </th>
 	</tr>
 	</table>
 </main>
@@ -407,7 +407,7 @@ fetch(url + document.getElementById('PUBGuser').value, {
 						killCell.innerHTML = res.included[i].attributes.stats.kills; 
 						damageCell.innerHTML = res.included[i].attributes.stats.damageDealt;
 						winPlaceCell.innerHTML = res.included[i].attributes.stats.winPlace;
-						timeSurvivedCell.innerHTML = (res.included[i].attributes.stats.timeSurvived / 60).toFixed(2) + ' minutes';
+						timeSurvivedCell.innerHTML = (res.included[i].attributes.stats.timeSurvived / 60).toFixed(2);
 						DBNOCell.innerHTML = res.included[i].attributes.stats.DBNOs;
 						assistCell.innerHTML = res.included[i].attributes.stats.assists;
 					}
@@ -501,6 +501,40 @@ function search() {
         tr[i].style.display = "none";
       }
     } 
+  }
+}
+function sortTableNumber(n) {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("myTable");
+  switching = true;
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      //check if the two rows should switch place:
+      if (Number(x.innerHTML) > Number(y.innerHTML)) {
+        //if so, mark as a switch and break the loop:
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
   }
 }
 
